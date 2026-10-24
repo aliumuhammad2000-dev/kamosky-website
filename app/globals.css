@@ -1,26 +1,55 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+:root { --background: #f5f1e8; --foreground: #123e32; }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-forest-950: #082f27;
+  --color-forest-900: #123e32;
+  --color-forest-800: #1a4e3f;
+  --color-ivory-50: #fbfaf5;
+  --color-ivory-100: #f5f1e8;
+  --color-gold-100: #eee2c6;
+  --color-gold-200: #e1c982;
+  --color-gold-300: #c9a65a;
+  --color-gold-500: #a77d2f;
+  --color-gold-600: #89631f;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-playfair);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+html { scroll-behavior: smooth; }
+body { background: var(--background); color: var(--foreground); font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif; }
+::selection { background: #c9a65a; color: #082f27; }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@utility site-container { width: min(100% - 2.5rem, 80rem); margin-inline: auto; }
+@utility section-space { padding-block: clamp(5rem, 10vw, 9rem); }
+@utility display-heading { font-family: var(--font-playfair), Georgia, serif; font-weight: 500; letter-spacing: -0.035em; }
+@utility eyebrow { color: color-mix(in srgb, currentColor 64%, transparent); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.22em; line-height: 1.2; text-transform: uppercase; }
+@utility button { align-items: center; display: inline-flex; gap: 0.75rem; justify-content: center; min-height: 3rem; padding-inline: 1.25rem; transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease; }
+@utility button-small { min-height: 2.5rem; padding-inline: 1rem; }
+@utility button-gold { background: #e1c982; color: #082f27; font-size: 0.8rem; font-weight: 600; }
+@utility button-light { border: 1px solid rgb(251 250 245 / 0.4); color: #fbfaf5; font-size: 0.8rem; }
+@utility button-dark { background: #123e32; color: #fbfaf5; font-size: 0.8rem; }
+@utility button-outline-light { border: 1px solid rgb(251 250 245 / 0.35); color: #fbfaf5; font-size: 0.8rem; }
+@utility link-arrow { align-items: center; border-bottom: 1px solid #a77d2f; color: #89631f; display: inline-flex; gap: 0.75rem; padding-bottom: 0.45rem; font-size: 0.8rem; font-weight: 600; transition: gap 180ms ease, color 180ms ease; }
+
+.button:hover, .button:focus-visible { transform: translateY(-2px); }
+.button-gold:hover, .button-gold:focus-visible { background: #f1d995; }
+.button-light:hover, .button-light:focus-visible, .button-outline-light:hover, .button-outline-light:focus-visible { border-color: #e1c982; color: #e1c982; }
+.button-dark:hover, .button-dark:focus-visible { background: #1a4e3f; }
+.link-arrow:hover, .link-arrow:focus-visible { color: #a77d2f; gap: 1rem; }
+.nav-link { color: rgb(251 250 245 / 0.72); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; transition: color 180ms ease; }
+.nav-link:hover, .nav-link:focus-visible { color: #e1c982; }
+.placeholder-grid { background-image: linear-gradient(rgb(251 250 245 / 0.06) 1px, transparent 1px), linear-gradient(90deg, rgb(251 250 245 / 0.06) 1px, transparent 1px); background-size: 3rem 3rem; }
+
+@keyframes rise { from { opacity: 0; transform: translateY(1rem); } to { opacity: 1; transform: translateY(0); } }
+.animate-rise { animation: rise 700ms ease-out both; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }
+@media (min-width: 640px) { .site-container { width: min(100% - 4rem, 80rem); } }
