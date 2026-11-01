@@ -112,14 +112,14 @@ export function InitiativesSection() {
         <SectionIntro
           eyebrow="02 · Areas of focus"
           title="Where service meets the everyday."
-          description="These four themes provide a clear structure for future updates. Programme names, outcomes, dates, and locations should be replaced with verified information before publication."
+          description="Four documented areas of community engagement, supported by public reporting and attributed sources."
           tone="light"
         />
         <div className="mt-14 grid gap-px overflow-hidden border border-ivory-100/15 bg-ivory-100/15 sm:grid-cols-2 lg:grid-cols-4">
           {initiatives.map((initiative) => (
             <article
               key={initiative.title}
-              className="group bg-forest-900 p-6 transition-colors hover:bg-forest-800 sm:p-8"
+              className="group flex flex-col bg-forest-900 p-6 transition-colors hover:bg-forest-800 sm:p-8"
             >
               {initiative.image ? (
                 <div className="relative mb-8 aspect-16/10 overflow-hidden border border-ivory-100/15">
@@ -140,9 +140,26 @@ export function InitiativesSection() {
               </div>
               <h3 className="mt-16 font-serif text-2xl text-ivory-50">{initiative.title}</h3>
               <p className="mt-4 text-sm leading-6 text-ivory-100/60">{initiative.text}</p>
-              <span className="mt-8 inline-flex text-gold-200 transition-transform group-hover:translate-x-1">
-                <Icon name="arrow" className="size-4" />
-              </span>
+              {initiative.supportingText ? (
+                <p className="mt-5 border-t border-ivory-100/15 pt-4 text-xs leading-5 text-ivory-100/55">
+                  {initiative.supportingText}
+                </p>
+              ) : null}
+              {initiative.source ? (
+                <a
+                  href={initiative.source.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${initiative.source.label} about ${initiative.title}`}
+                  className="mt-auto pt-5 inline-flex w-fit items-center gap-3 border-b border-gold-300/60 pb-1 text-xs font-semibold text-gold-200 transition-colors hover:border-gold-200 hover:text-gold-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold-300"
+                >
+                  {initiative.source.label} <Icon name="arrow" className="size-4" />
+                </a>
+              ) : (
+                <span className="mt-auto pt-8 inline-flex text-gold-200 transition-transform group-hover:translate-x-1">
+                  <Icon name="arrow" className="size-4" />
+                </span>
+              )}
             </article>
           ))}
         </div>
